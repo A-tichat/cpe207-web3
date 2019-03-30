@@ -172,6 +172,9 @@ input, select, textarea {
 		color: inherit;
 		text-decoration: none;
 	}
+		a.submitbtn {
+			border-bottom: none;
+		}
 
 		a:before {
 			-moz-transition: color 0.2s ease;
@@ -3589,4 +3592,8 @@ input, select, textarea {
 				padding: 1.5em;
 			}
 
+		}
+
+		div.alert {
+			color: red;
 		}
