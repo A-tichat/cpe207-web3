@@ -3594,6 +3594,6 @@ input, select, textarea {
 
 		}
 
-		div.alert {
+		#alertmsg {
 			color: red;
 		}

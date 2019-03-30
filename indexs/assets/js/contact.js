@@ -28,7 +28,7 @@ class Book {
         <td>Male</td>
         <td>${book.phone}</td>
         <td>${book.email}</td>
-        <td><a href="#send-list" class="btn btn-danger btn-sm delete"> X </a></td>
+        <td><a href="#send-list" class="btn alert btn-sm delete"> X </a></td>
       `;
   
       list.appendChild(row);
@@ -40,7 +40,7 @@ class Book {
       }
     }
     static showAlert() {
-      document.querySelector('.alert').value = "Please fill in all fields";
+      document.querySelector('#alertmsg').value = "Please fill in all fields";
     }
   
     static clearFields() {
