@@ -1,4 +1,4 @@
-class Book {
+class Send {
     constructor(subject, name, msg, phone, email) {
       this.subject = subject;
       this.name = name;
@@ -9,38 +9,38 @@ class Book {
   }
   
   class UI {
-    static displayBooks() {
+    static displaySends() {
        
-      const books = Store.getBooks();
+      const sends = Store.getSends();
   
-      books.forEach((book) => UI.addBookToList(book));
+      sends.forEach((send) => UI.addSendToList(send));
     }
   
-    static addBookToList(book) {
+    static addSendToList(send) {
       const list = document.querySelector('#send-list');
   
       const row = document.createElement('tr');
   
       row.innerHTML = `
-        <td>${book.subject}</td>
-        <td>${book.name}</td>
-        <td>${book.msg}</td>
+        <td>${send.subject}</td>
+        <td>${send.name}</td>
+        <td>${send.msg}</td>
         <td>Male</td>
-        <td>${book.phone}</td>
-        <td>${book.email}</td>
-        <td><a href="#send-list" class="btn alert btn-sm delete"> X </a></td>
+        <td>${send.phone}</td>
+        <td>${send.email}</td>
+        <td><a href="#send-list" class="btn alertmsg btn-sm delete"> Delete </a></td>
       `;
   
       list.appendChild(row);
     }
   
-    static deleteBook(el) {
+    static deleteSend(el) {
       if(el.classList.contains('delete')) {
         el.parentElement.parentElement.remove();
       }
     }
     static showAlert() {
-      document.querySelector('#alertmsg').value = "Please fill in all fields";
+      alert("Please fill in all fields");
     }
   
     static clearFields() {
@@ -53,37 +53,37 @@ class Book {
   }
   
   class Store {
-    static getBooks() {
-      let books;
-      if(localStorage.getItem('books') === null) {
-        books = [];
+    static getSends() {
+      let sends;
+      if(localStorage.getItem('sends') === null) {
+        sends = [];
       } else {
-        books = JSON.parse(localStorage.getItem('books'));
+        sends = JSON.parse(localStorage.getItem('sends'));
       }
   
-      return books;
+      return sends;
     }
   
-    static addBook(book) {
-      const books = Store.getBooks();
-      books.push(book);
-      localStorage.setItem('books', JSON.stringify(books));
+    static addSend(send) {
+      const sends = Store.getSends();
+      sends.push(send);
+      localStorage.setItem('sends', JSON.stringify(sends));
     }
   
-    static removeBook(msg) {
-      const books = Store.getBooks();
+    static removeSend(msg) {
+      const sends = Store.getSends();
   
-      books.forEach((book, index) => {
-        if(book.msg === msg) {
-          books.splice(index, 1);
+      sends.forEach((send, index) => {
+        if(send.msg === msg) {
+          sends.splice(index, 1);
         }
       });
   
-      localStorage.setItem('books', JSON.stringify(books));
+      localStorage.setItem('sends', JSON.stringify(sends));
     }
   }
   
-  document.addEventListener('DOMContentLoaded', UI.displayBooks);
+  document.addEventListener('DOMContentLoaded', UI.displaySends);
   
   document.querySelector('#send-form').addEventListener('submit', (e) => {
     e.preventDefault();
@@ -97,11 +97,11 @@ class Book {
     if(subject === '' || name === '' || msg === '' || phone === '' || email === '') {
       UI.showAlert();
     } else {
-      const book = new Book(subject, name, msg, phone, email);
+      const send = new Send(subject, name, msg, phone, email);
   
-      UI.addBookToList(book);
+      UI.addSendToList(send);
   
-      Store.addBook(book);
+      Store.addSend(send);
   
       UI.clearFields();
     }
@@ -109,9 +109,9 @@ class Book {
   
   document.querySelector('#send-list').addEventListener('click', (e) => {
     
-    UI.deleteBook(e.target);
+    UI.deleteSend(e.target);
   
-    Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
+    Store.removeSend(e.target.parentElement.previousElementSibling.textContent);
   
   });
   
